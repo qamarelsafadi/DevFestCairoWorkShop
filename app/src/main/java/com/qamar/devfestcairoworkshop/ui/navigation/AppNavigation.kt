@@ -7,9 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.qamar.devfestcairoworkshop.ui.screens.login.LoginScreen
-import com.qamar.devfestcairoworkshop.ui.screens.login.LoginScreenUiState
 import com.qamar.devfestcairoworkshop.ui.screens.main.MainScreen
-import com.qamar.devfestcairoworkshop.ui.screens.main.MainScreenUiState
 import com.qamar.devfestcairoworkshop.ui.screens.splash.SplashScreen
 
 @Composable
