@@ -15,25 +15,26 @@ fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screens.Splash::class
+        startDestination = Screens.SplashScreen::class
     ) {
-        composable<Screens.Splash> {
+        composable<Screens.SplashScreen> {
             SplashScreen(
                 onNavigateToLogin = {
                     navController.navigateToLogin()
                 }
             )
         }
-        composable<Screens.Login> {
+        composable<Screens.LoginScreen> {
             LoginScreen(
                 onNavigateToMain = {
                     navController.navigateToMain()
                 },
             )
         }
-        composable<Screens.Main> { backStackEntry ->
-            val mainScreenArgs = backStackEntry.toRoute<Screens.Main>()
+        composable<Screens.MainScreen> { backStackEntry ->
+            val mainScreenScreenArgs = backStackEntry.toRoute<Screens.MainScreen>()
             MainScreen(
+                name = mainScreenScreenArgs.userName,
                 onNavigateToLogin = {
                     navController.navigateToLogin()
                 },

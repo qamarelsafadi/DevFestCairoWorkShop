@@ -27,6 +27,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun MainScreen(
+    name: String,
     onNavigateToLogin: () -> Unit
 ) {
     var startAnimation by remember { mutableStateOf(false) }
@@ -61,7 +62,7 @@ fun MainScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome to the Main Screen!",
+            text = "Welcome $name to the Main Screen!",
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier
                 .alpha(textAlpha)
@@ -82,5 +83,7 @@ fun MainScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewMainScreen() {
-    MainScreen(onNavigateToLogin = {})
+    MainScreen(
+        name =  "DevFestCairo",
+        onNavigateToLogin = {})
 }

@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 
 sealed interface Screens {
     @Serializable
-    data object Splash : Screens
+    data object SplashScreen : Screens
 
     @Serializable
-    data object Login : Screens
+    data object LoginScreen : Screens
 
     @Serializable
-    data class Main(val userName: String = "DevFest") : Screens
+    data class MainScreen(val userName: String = "DevFest") : Screens
 }
