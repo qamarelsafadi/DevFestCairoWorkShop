@@ -76,4 +76,4 @@ dependencies {
 
 Happy coding! 🚀
 
-*DevFest Cairo Workshop Team*
+*DevFest Cairo Workshop*
