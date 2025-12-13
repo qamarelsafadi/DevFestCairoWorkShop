@@ -1,44 +1,38 @@
-
 package com.qamar.devfestcairoworkshop.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
 import com.qamar.devfestcairoworkshop.ui.screens.login.LoginScreen
 import com.qamar.devfestcairoworkshop.ui.screens.main.MainScreen
 import com.qamar.devfestcairoworkshop.ui.screens.splash.SplashScreen
 
 @Composable
 fun AppNavigation() {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = Screens.SplashScreen::class
-    ) {
-        composable<Screens.SplashScreen> {
-            SplashScreen(
-                onNavigateToLogin = {
-                    navController.navigateToLogin()
-                }
-            )
+    val appNavigator = rememberAppNavigator()
+    val entries = entryProvider<Any> {
+        entry<SplashScreen> {
+            SplashScreen {
+                appNavigator.navigateWithReplace(LoginScreen)
+            }
         }
-        composable<Screens.LoginScreen> {
-            LoginScreen(
-                onNavigateToMain = {
-                    navController.navigateToMain()
-                },
-            )
+        entry<LoginScreen> {
+            LoginScreen {
+                appNavigator.navigateWithReplace(MainScreen("DevFestCairo"))
+            }
         }
-        composable<Screens.MainScreen> { backStackEntry ->
-            val mainScreenScreenArgs = backStackEntry.toRoute<Screens.MainScreen>()
-            MainScreen(
-                name = mainScreenScreenArgs.userName,
-                onNavigateToLogin = {
-                    navController.navigateToLogin()
-                },
-            )
+        entry<MainScreen> {
+            MainScreen(it.name) {
+                appNavigator.navigateWithClearBackstack(LoginScreen)
+            }
         }
     }
+
+    NavDisplay(
+        backStack = appNavigator.backStack,
+        entryProvider = entries,
+        onBack = appNavigator::popUp
+
+    )
 }
